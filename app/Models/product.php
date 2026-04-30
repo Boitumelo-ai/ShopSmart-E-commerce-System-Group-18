@@ -4,13 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class product extends Model
+class Product extends Model
 {
 protected $table = 'product';
 
-protected $table =[
+protected $fillable =[
     'description',
-    'Quantity',
+    'quantity',
     'amount',
     'offered_by'
 ];
@@ -20,7 +20,7 @@ public function user()
 }
 
 public function userGood()
-{
-public $this->hasMany(UserGood::class, 'product_id')
-}
+ {
+  return $this->hasMany(UserGood::class, 'product_id');
+ }
 }
