@@ -4,23 +4,24 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class product extends Model
+class Product extends Model
 {
-protected $table = 'product';
+    protected $table = 'product';
 
-protected $table =[
-    'description',
-    'Quantity',
-    'amount',
-    'offered_by'
-];
-public function user()
-{
-    return $this->belongsTo(User::class, 'offered_by');
-}
+    protected $fillable = [
+        'description',
+        'quantity',
+        'amount',
+        'offered_by'
+    ];
 
-public function userGood()
-{
-public $this->hasMany(UserGood::class, 'product_id')
-}
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'offered_by');
+    }
+
+    public function userGood()
+    {
+        return $this->hasMany(UserGood::class, 'product_id');
+    }
 }

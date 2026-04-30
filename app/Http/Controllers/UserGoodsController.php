@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\UserGood;
+use App\Models\UserGoods;
 use App\Models\User;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
-class UserGoodController extends Controller
+class UserGoodsController extends Controller
 {
     // INDEX - Show all orders with related user and product
     public function index()
     {
         // Load orders with the user who placed them and the product ordered
-        $userGoods = UserGood::with('user', 'product')->get();
+        $userGoods = UserGoods::with('user', 'product')->get();
 
         return view('usergoods.index', ['userGoods' => $userGoods]);
     }
@@ -22,10 +22,10 @@ class UserGoodController extends Controller
     public function show($id)
     {
         // Load everything related to this order
-        $userGood = UserGood::with('user', 'product', 'payment', 'review')
+        $userGoods = UserGoods::with('user', 'product', 'payment', 'review')
                             ->findOrFail($id);
 
-        return view('usergoods.show', ['userGood' => $userGood]);
+        return view('usergoods.show', ['userGood' => $userGoods]);
     }
 
     // STORE - Place a new order
@@ -41,7 +41,7 @@ class UserGoodController extends Controller
             'amount'           => 'required|numeric|min:0'
         ]);
 
-        UserGood::create([
+        UserGoods::create([
             'quantity'         => $request->quantity,
             'collect_delivery' => $request->collect_delivery,
             'destination'      => $request->destination,
@@ -61,8 +61,8 @@ class UserGoodController extends Controller
             'status' => 'required' // most common update is changing status
         ]);
 
-        $userGood = UserGood::findOrFail($id);
-        $userGood->update(['status' => $request->status]);
+        $userGoods = UserGoods::findOrFail($id);
+        $userGoods->update(['status' => $request->status]);
 
         return redirect('/usergoods');
     }
@@ -70,8 +70,8 @@ class UserGoodController extends Controller
     // DESTROY - Cancel/delete an order
     public function destroy($id)
     {
-        $userGood = UserGood::findOrFail($id);
-        $userGood->delete();
+        $userGoods = UserGoods::findOrFail($id);
+        $userGoods->delete();
         return redirect('/usergoods');
     }
 }

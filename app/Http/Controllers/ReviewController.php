@@ -12,9 +12,9 @@ class ReviewController extends Controller
     public function index()
     {
         // Load reviews with their related order
-        $reviews = Review::with('userGood')->get();
+        $review = Review::with('userGood')->get();
 
-        return view('reviews.index', ['reviews' => $reviews]);
+        return view('review.index', ['review' => $review]);
     }
 
     // SHOW - Show one review
@@ -22,7 +22,7 @@ class ReviewController extends Controller
     {
         $review = Review::with('userGood')->findOrFail($id);
 
-        return view('reviews.show', ['review' => $review]);
+        return view('review.show', ['review' => $review]);
     }
 
     // STORE - Submit a new review
@@ -48,6 +48,6 @@ class ReviewController extends Controller
     {
         $review = Review::findOrFail($id);
         $review->delete();
-        return redirect('/reviews');
+        return redirect('/review');
     }
 }

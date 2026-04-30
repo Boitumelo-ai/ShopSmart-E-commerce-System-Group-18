@@ -12,9 +12,9 @@ class PaymentController extends Controller
     public function index()
     {
         // Load payments with their related order
-        $payments = Payment::with('userGood')->get();
+        $payment = Payment::with('userGood')->get();
 
-        return view('payments.index', ['payments' => $payments]);
+        return view('payment.index', ['payment' => $payment]);
     }
 
     // SHOW - Show one payment
@@ -22,7 +22,7 @@ class PaymentController extends Controller
     {
         $payment = Payment::with('userGood')->findOrFail($id);
 
-        return view('payments.show', ['payment' => $payment]);
+        return view('payment.show', ['payment' => $payment]);
     }
 
     // STORE - Record a new payment
@@ -38,7 +38,7 @@ class PaymentController extends Controller
             'user_goods_id' => $request->user_goods_id
         ]);
 
-        return redirect('/payments');
+        return redirect('/payment');
     }
 
     // DESTROY - Delete a payment record

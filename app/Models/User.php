@@ -8,7 +8,6 @@ namespace App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 // Notifiable allows us to send notifications to users
-// For example: email notifications, SMS etc.
 use Illuminate\Notifications\Notifiable;
 
 
@@ -66,3 +65,4 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserGood::class, 'user_id');
     }
+}

@@ -12,9 +12,9 @@ class ProductController extends Controller
     public function index()
     {
         // Load all products and their related vendor (user)
-        $products = Product::with('user')->get();
+        $product = Product::with('user')->get();
 
-        return view('products.index', ['products' => $products]);
+        return view('product.index', ['product' => $product]);
     }
 
     // SHOW - Show one product with full details
@@ -22,7 +22,7 @@ class ProductController extends Controller
     {
         $product = Product::with('user', 'userGoods')->findOrFail($id);
 
-        return view('products.show', ['product' => $product]);
+        return view('product.show', ['product' => $product]);
     }
 
     // STORE - Save a new product

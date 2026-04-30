@@ -10,9 +10,9 @@ class RoleController extends Controller
 public function index()
 {
     //get all roles from the database
-    $roles = Role::all();
+    $role = Role::all();
 
-    return view('roles.index', ['roles'=> $roles]);
+    return view('role.index', ['role'=> $role]);
 }
 
 //show one specofic role
@@ -22,7 +22,7 @@ public function show($id)
     //find role with this id or fail with a 404 error
     $role=Role::findorfail($id);
 
-    return view('roles.show', ['role'=>$role]);
+    return view('role.show', ['role'=>$role]);
 }
 
 public function store(Request $request)
@@ -35,7 +35,7 @@ public function store(Request $request)
         'name'=>$request->name
     ]);
 
-    return redirect('/roles');
+    return redirect('/role');
 
 }
 
@@ -62,7 +62,7 @@ public function destroy($id)
 
     $role->delete();
     
-    return redirect('/roles');
+    return redirect('/role');
 }
 
 }

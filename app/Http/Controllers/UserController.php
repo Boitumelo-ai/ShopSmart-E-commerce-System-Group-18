@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\user;
-use\app\models\role;
+use App\Models\User;
+use app\Models\Role;
 use Illuminate\Http\Request;
 
 
@@ -13,16 +13,16 @@ class UserController extends Controller
     public function index()
 
     {
-        $users=user::with('role')->get();
+        $user=user::with('role')->get();
 
-        return view('users.index', ['users'=> $users]);
+        return view('user.index', ['user'=> $user]);
     }
 
     public function show($id)
     {
-        $user = User::with('role', 'products', 'userGoods')->findorfail($id);
+        $user = User::with('role', 'product', 'userGoods')->findorfail($id);
 
-        return view('users.show', ['user'=>$user]);
+        return view('user.show', ['user'=>$user]);
     }
 
     public function store(Request $request)
@@ -44,7 +44,7 @@ class UserController extends Controller
 
         ]);
 
-        return redirect('/users');
+        return redirect('/user');
 
 
     }
@@ -66,14 +66,14 @@ class UserController extends Controller
             'role_id'    => $request->role_id
         ]);
 
-        return redirect('/users');
+        return redirect('/user');
     }
 
     public function destroy($id)
     {
         $user = User::findOrFail($id);
         $user->delete();
-        return redirect('/users');
+        return redirect('/user');
     }
 }
 

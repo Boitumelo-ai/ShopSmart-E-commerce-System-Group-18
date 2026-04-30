@@ -16,6 +16,6 @@ protected $fillable = [
 
 public function userGood()
 {
-    return $this->belongsTo(userGood::class, 'user_goods_id')
+    return $this->belongsTo(userGood::class, 'user_goods_id');
 }
 }
